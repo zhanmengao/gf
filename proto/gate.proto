@@ -1,0 +1,31 @@
+syntax = "proto3";
+package zhanmengao.gf.proto;
+option  go_package = "forevernine.com/zhanmengao/gf_proto/go/pb";
+
+
+message OamSetStatusReq {
+  int32 Status = 1;  //状态
+}
+
+message OamGetStatusRsp {
+  int32 Status = 1;
+  bool  Ready  = 2;
+}
+
+//踢人
+message GateKickUserReq {
+  string UID         = 1;
+  string DeviceToken = 2;
+}
+
+//推送
+message NotifyToUserReq {
+  bool            Broadcast = 1;  //是否是广播（广播的话不读UIDList）
+  repeated string UIDList   = 2;  //给哪些人推
+  int32           CMD       = 3;
+  bytes           Data      = 4;
+}
+
+message NotifyToUserRsp {
+  repeated string SendFailUID = 2;  //推失败的UID
+}
